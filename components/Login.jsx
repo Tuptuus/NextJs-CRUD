@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import styles from "../styles/Login.module.css";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const {
@@ -18,6 +19,8 @@ export default function Login() {
     Top,
     Mid,
     Bottom,
+    Title,
+    underlineInputs,
   } = styles;
 
   const [slideCard, setSlideCard] = useState(false);
@@ -49,12 +52,12 @@ export default function Login() {
     }
   };
 
+  const { signUp, login } = useAuth();
   const createNewUser = () => {
-    createUserWithEmailAndPassword(
-      auth,
-      registerEmailInputValue,
-      registerPasswordInputValue
-    );
+    signUp(registerEmailInputValue, registerPasswordInputValue);
+  };
+  const signIn = () => {
+    login(loginEmailInputValue, loginPasswordInputValue);
   };
 
   return (
@@ -63,7 +66,7 @@ export default function Login() {
         <div className={`${slideCardOver} ${slideCard ? slide : ""}`}></div>
         <div className={loginSideContainer}>
           <div className={Top}>
-            <p className="Title">Login</p>
+            <p className={Title}>Login</p>
           </div>
           <div className={Mid}>
             <input
@@ -73,6 +76,7 @@ export default function Login() {
               value={loginEmailInputValue}
               onChange={(e) => handleInputs(e, "loginEmail")}
             />
+            {/* <span className={underlineInputs}></span> */}
             <input
               className={inputs}
               type="password"
@@ -80,7 +84,9 @@ export default function Login() {
               value={loginPasswordInputValue}
               onChange={(e) => handleInputs(e, "loginPassword")}
             />
-            <button className={buttons}>Login</button>
+            <button onClick={signIn} className={buttons}>
+              Login
+            </button>
           </div>
           <div className={Bottom}>
             <p className={changeSide}>
@@ -93,7 +99,8 @@ export default function Login() {
         </div>
         <div className={registerSideContainer}>
           <div className={Top}>
-            <p className="Title">Register</p>
+            <p className={Title}>Register</p>
+            {auth.currentUser ? `Witaj ${auth.currentUser.email}` : null}
           </div>
           <div className={Mid}>
             <input
@@ -124,12 +131,7 @@ export default function Login() {
             </button>
           </div>
           <div className={Bottom}>
-            <p
-              onClick={() => {
-                console.log(auth.currentUser.email);
-              }}
-              className={changeSide}
-            >
+            <p className={changeSide}>
               You have{" "}
               <span onClick={handleSlideCard} className={changeSideAccount}>
                 account?

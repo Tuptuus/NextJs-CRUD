@@ -1,6 +1,13 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 import { auth } from "../firebase-config";
 
 export default function Userboard() {
-  return <div>{`Witam ${auth.currentUser.email}`}</div>;
+  const { logout } = useAuth();
+  return (
+    <div>
+      {`Witam ${auth.currentUser.email}`}
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
 }

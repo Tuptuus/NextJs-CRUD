@@ -57,15 +57,29 @@
 }
 
 .inputs {
+  display: inline-block;
   width: 80%;
   outline: none;
   border: none;
-  border-bottom: 2px solid orange;
+  border-bottom: 2px solid grey;
   height: 50px;
   background-color: transparent;
   padding-left: 10px;
+  padding-bottom: 4px;
+  background-image: linear-gradient(#ffa500 0 0);
+  background-size: 0% 4px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-position 0s 0.4s, background-size 0.4s;
   font-size: 18px;
   margin-top: 30px;
+  /* transition: 0.3s; */
+}
+
+.inputs:focus {
+  border-bottom: 2px solid transparent;
+  background-position: 100% 100%;
+  background-size: 100% 4px;
 }
 
 .inputs::placeholder {
@@ -91,7 +105,8 @@
   height: 20%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 11%;
 }
 
 .Mid {
@@ -111,3 +126,19 @@
   height: 20%;
   padding-right: 60px;
 }
+
+.Title {
+  font-family: "Pacifico", cursive;
+  color: orange;
+  font-size: 50px;
+  text-decoration: underline;
+}
+
+/* .Title:hover ~ .inputs {
+  background-color: blue;
+}
+
+.underlineInputs {
+  width: 77%;
+  height: 3px;
+} */
