@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import styles from "../styles/Login.module.css";
 import { useAuth } from "../context/AuthContext";
+import { Spinner } from "@chakra-ui/react";
 
 export default function Login() {
   const {
@@ -20,12 +20,21 @@ export default function Login() {
     Mid,
     Bottom,
     Title,
-    underlineInputs,
+    welcomeTitle,
+    slideDesc,
+    slideEnjoy,
+    slideTop,
+    slideMid,
+    slideBottom,
+    errorDiv,
+    errorMessage,
   } = styles;
 
-  const [slideCard, setSlideCard] = useState(false);
+  const [slideCard, setSlideCard] = useState(true);
   const handleSlideCard = () => {
     setSlideCard(!slideCard);
+    setLoginLoading(false);
+    setRegisterLoading(false);
   };
 
   const [loginEmailInputValue, setLoginEmailInputValue] = useState("");
@@ -52,18 +61,50 @@ export default function Login() {
     }
   };
 
-  const { signUp, login } = useAuth();
+  const {
+    signUp,
+    login,
+    setLoginLoading,
+    loginLoading,
+    registerLoading,
+    setRegisterLoading,
+    loginErrorMsg,
+    registerErrorMsg,
+  } = useAuth();
   const createNewUser = () => {
-    signUp(registerEmailInputValue, registerPasswordInputValue);
+    setRegisterLoading(true);
+    signUp(
+      registerEmailInputValue,
+      registerPasswordInputValue,
+      registerConfirmPasswordInputValue
+    );
   };
   const signIn = () => {
+    setLoginLoading(true);
     login(loginEmailInputValue, loginPasswordInputValue);
   };
 
   return (
     <div className={backgroundLogin}>
       <div className={wholeLoginContainer}>
-        <div className={`${slideCardOver} ${slideCard ? slide : ""}`}></div>
+        <div className={`${slideCardOver} ${slideCard ? slide : ""}`}>
+          <div className={slideTop}>
+            <p className={welcomeTitle}>
+              Welcome to <span className={Title}>TupCrud</span>
+            </p>
+          </div>
+          <div className={slideMid}>
+            <p className={slideDesc}>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+              ipsum, odit ratione recusandae quaerat ab obcaecati iure quia
+              culpa perferendis magni officia vitae facilis magnam in
+              praesentium sit laboriosam quod!
+            </p>
+          </div>
+          <div className={slideBottom}>
+            <p className={slideEnjoy}>Enjoy ;)</p>
+          </div>
+        </div>
         <div className={loginSideContainer}>
           <div className={Top}>
             <p className={Title}>Login</p>
@@ -76,7 +117,6 @@ export default function Login() {
               value={loginEmailInputValue}
               onChange={(e) => handleInputs(e, "loginEmail")}
             />
-            {/* <span className={underlineInputs}></span> */}
             <input
               className={inputs}
               type="password"
@@ -84,8 +124,14 @@ export default function Login() {
               value={loginPasswordInputValue}
               onChange={(e) => handleInputs(e, "loginPassword")}
             />
+            <div className={errorDiv}>
+              {loginErrorMsg ? (
+                <span className={errorMessage}>{loginErrorMsg}</span>
+              ) : null}
+            </div>
             <button onClick={signIn} className={buttons}>
-              Login
+              <span style={{ paddingRight: 10 }}>Login</span>{" "}
+              {loginLoading ? <Spinner size="md" /> : null}
             </button>
           </div>
           <div className={Bottom}>
@@ -126,8 +172,14 @@ export default function Login() {
               value={registerConfirmPasswordInputValue}
               onChange={(e) => handleInputs(e, "registerConfirmPassword")}
             />
+            <div className={errorDiv}>
+              {registerErrorMsg ? (
+                <span className={errorMessage}>{registerErrorMsg}</span>
+              ) : null}
+            </div>
             <button onClick={createNewUser} className={buttons}>
-              Register
+              <span style={{ paddingRight: 10 }}>Register</span>{" "}
+              {registerLoading ? <Spinner size="md" /> : null}
             </button>
           </div>
           <div className={Bottom}>

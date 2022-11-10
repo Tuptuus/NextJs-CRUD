@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(../assets/loginbackground.jpg);
+  background-size: cover;
+  /* background: #f12711; */
+  /* background: linear-gradient(to right, #f5af19, #f12711); */
 }
 
 .wholeLoginContainer {
@@ -12,13 +16,14 @@
   height: 70%;
   display: flex;
   border-radius: 20px;
+  box-shadow: 5px 5px 20px 10px grey;
 }
 
 .slideCardOver {
   width: 30%;
   height: 70%;
   position: absolute;
-  background-color: red;
+  background-color: rgb(31, 30, 30);
   border-radius: 20px;
   transition: 0.3s;
 }
@@ -96,7 +101,10 @@
   color: white;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 50px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Top {
@@ -132,6 +140,58 @@
   color: orange;
   font-size: 50px;
   text-decoration: underline;
+}
+
+.slideTop {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideMid {
+  width: 100%;
+  height: 60%;
+  padding-top: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.slideBottom {
+  color: orange;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+
+.welcomeTitle {
+  font-size: 30px;
+  color: white;
+}
+
+.slideDesc {
+  width: 80%;
+  color: white;
+  font-size: 18px;
+  text-align: justify;
+}
+
+.errorMessage {
+  color: red;
+  padding-top: 10px;
+}
+
+.errorDiv {
+  /* background-color: red; */
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 /* .Title:hover ~ .inputs {
