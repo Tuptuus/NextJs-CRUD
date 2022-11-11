@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -20,16 +21,14 @@ export function AuthProvider({ children }) {
   const [loginErrorMsg, setLoginErrorMsg] = useState(null);
   const [registerErrorMsg, setRegisterErrorMsg] = useState(null);
 
-  // if (email == "" || password == "" || confirmPassowrd == "") {
-  //   setRegisterErrorMsg("Fill all data");
-  //   setTimeout(() => {
-  //     setRegisterErrorMsg(null);
-  //   }, 3000);
-  // } else
-
-  async function signUp(email, password, confirmPassowrd) {
+  async function signUp(email, password, confirmPassowrd, registerNick) {
     try {
-      if (email == "" || password == "" || confirmPassowrd == "") {
+      if (
+        email == "" ||
+        password == "" ||
+        confirmPassowrd == "" ||
+        registerNick == ""
+      ) {
         setRegisterErrorMsg("Fill all data");
         setTimeout(() => {
           setRegisterErrorMsg(null);
@@ -43,6 +42,9 @@ export function AuthProvider({ children }) {
         setRegisterLoading(false);
       } else {
         await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(auth.currentUser, {
+          displayName: registerNick,
+        });
         setRegisterLoading(false);
       }
     } catch (error) {

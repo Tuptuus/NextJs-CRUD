@@ -40,6 +40,7 @@ export default function Login() {
   const [loginEmailInputValue, setLoginEmailInputValue] = useState("");
   const [loginPasswordInputValue, setLoginPasswordInputValue] = useState("");
   const [registerEmailInputValue, setRegisterEmailInputValue] = useState("");
+  const [registerNickInputValue, setRegisterNickInputValue] = useState("");
   const [registerPasswordInputValue, setRegisterPasswordInputValue] =
     useState("");
   const [
@@ -54,6 +55,8 @@ export default function Login() {
       setLoginPasswordInputValue(e.target.value);
     } else if (type == "registerEmail") {
       setRegisterEmailInputValue(e.target.value);
+    } else if (type == "registerNick") {
+      setRegisterNickInputValue(e.target.value);
     } else if (type == "registerPassword") {
       setRegisterPasswordInputValue(e.target.value);
     } else if (type == "registerConfirmPassword") {
@@ -76,7 +79,8 @@ export default function Login() {
     signUp(
       registerEmailInputValue,
       registerPasswordInputValue,
-      registerConfirmPasswordInputValue
+      registerConfirmPasswordInputValue,
+      registerNickInputValue
     );
   };
   const signIn = () => {
@@ -155,6 +159,14 @@ export default function Login() {
               placeholder="Enter your email"
               value={registerEmailInputValue}
               onChange={(e) => handleInputs(e, "registerEmail")}
+            />
+            <input
+              className={inputs}
+              type="text"
+              placeholder="Enter your nickname"
+              value={registerNickInputValue}
+              onChange={(e) => handleInputs(e, "registerNick")}
+              maxLength="15"
             />
             <input
               className={inputs}

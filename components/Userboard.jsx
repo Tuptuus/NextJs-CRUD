@@ -1,13 +1,20 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { auth } from "../firebase-config";
+import Footer from "./Footer";
+import Header from "./Header";
+import styles from "../styles/Dashboard.module.css";
 
 export default function Userboard() {
-  const { logout } = useAuth();
+  const { mainContainer, contentContainer } = styles;
+  const { currentUser, logout } = useAuth();
   return (
-    <div>
-      {`Witam ${auth.currentUser.email}`}
-      <button onClick={logout}>Logout</button>
+    <div className={mainContainer}>
+      <Header />
+      <div className={contentContainer}>
+        {`Witam ${currentUser.displayName}`}
+        <button onClick={logout}>Logout</button>
+      </div>
+      <Footer />
     </div>
   );
 }
