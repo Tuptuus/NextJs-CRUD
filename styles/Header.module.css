@@ -4,6 +4,7 @@
   color: white;
   display: flex;
   min-height: 70px;
+  border-bottom: 2px solid grey;
 }
 
 .Left {

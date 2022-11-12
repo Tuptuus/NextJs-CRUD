@@ -1,10 +1,108 @@
 .mainContainer {
-  background-color: red;
+  background-color: #1f1e1e;
   width: 100%;
   height: 100vh;
 }
 
 .contentContainer {
-  background-color: yellow;
+  background-color: #1f1e1e;
   height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-bottom: 2px solid grey;
+}
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.taskInput {
+  width: 40%;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 20px;
+  outline: none;
+}
+
+.taskInput::placeholder {
+  color: black;
+}
+
+.addTaskBtn {
+  color: black;
+  background-color: white;
+  margin-left: 30px;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 25px;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.addTaskBtn:hover {
+  background-color: darkorange;
+}
+
+.tasksContainer {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  margin-top: 20px;
+  padding-bottom: 30px;
+}
+
+.tasksContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.task {
+  background-color: white;
+  box-shadow: 5px 5px 15px 2px orange;
+  display: flex;
+  width: 95%;
+  height: fit-content;
+  border-radius: 20px;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.Left {
+  width: 80%;
+}
+
+.taskContent {
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.Right {
+  display: flex;
+  justify-content: right;
+  width: 20%;
+  min-width: 150px;
+  color: black;
+}
+
+.taskIcon {
+  min-width: 35px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.taskIcon:hover {
+  color: darkorange;
 }

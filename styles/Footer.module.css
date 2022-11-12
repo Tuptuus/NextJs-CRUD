@@ -1,4 +1,15 @@
 .footerContainer {
-  background-color: green;
-  height: 10%;
+  background-color: #1f1e1e;
+  /* height: 10%; */
+  display: flex;
+  justify-content: center;
+}
+
+.githubIconStyle {
+  height: 100%;
+  /* display: flex; */
+  color: white;
+  width: 70px;
+  cursor: pointer;
+  margin-top: 10px;
 }
