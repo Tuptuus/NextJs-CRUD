@@ -11,7 +11,10 @@ export default function Header() {
   return (
     <div className={headerContainer}>
       <div className={Left}>
-        Welcome <span className={userName}>{currentUser.displayName}</span>
+        Welcome{" "}
+        <span className={userName}>
+          {currentUser ? currentUser.displayName : null}
+        </span>
       </div>
       <div className={Right}>
         <span onClick={logout} className={logoutIconSpan}>

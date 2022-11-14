@@ -97,10 +97,10 @@
 }
 
 .taskIcon {
-  min-width: 35px;
   cursor: pointer;
-  margin-right: 15px;
+  margin-right: 17px;
   transition: 0.3s;
+  font-size: 35px;
 }
 
 .taskIcon:hover {

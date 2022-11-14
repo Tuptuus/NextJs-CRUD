@@ -8,9 +8,9 @@ export default function Footer() {
   const { footerContainer, githubIconStyle } = styles;
   return (
     <div className={footerContainer}>
-      <div className={githubIconStyle}>
+      <div>
         <a href="https://github.com/Tuptuus" target="_blank" rel="noreferrer">
-          {githubIcon}
+          <span className={githubIconStyle}>{githubIcon}</span>
         </a>
       </div>
     </div>

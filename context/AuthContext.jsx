@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { useRouter } from "next/router";
 
 const AuthContext = createContext();
 
@@ -20,6 +21,8 @@ export function AuthProvider({ children }) {
   const [registerLoading, setRegisterLoading] = useState(false);
   const [loginErrorMsg, setLoginErrorMsg] = useState(null);
   const [registerErrorMsg, setRegisterErrorMsg] = useState(null);
+
+  const router = useRouter();
 
   async function signUp(email, password, confirmPassowrd, registerNick) {
     try {
@@ -46,6 +49,7 @@ export function AuthProvider({ children }) {
           displayName: registerNick,
         });
         setRegisterLoading(false);
+        router.push("MainPage");
       }
     } catch (error) {
       if (error.code == "auth/invalid-email") {
@@ -88,6 +92,7 @@ export function AuthProvider({ children }) {
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         setLoginLoading(false);
+        router.push("MainPage");
       }
     } catch (error) {
       if (error.code == "auth/wrong-password") {
@@ -118,6 +123,7 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     await signOut(auth);
+    router.push("/");
   }
 
   useEffect(() => {

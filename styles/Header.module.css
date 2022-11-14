@@ -34,6 +34,6 @@
 
 .logoutIconSpan {
   width: 60px;
-  height: 60px;
   cursor: pointer;
+  font-size: 60px;
 }

@@ -6,10 +6,7 @@
 }
 
 .githubIconStyle {
-  height: 100%;
-  /* display: flex; */
   color: white;
-  width: 70px;
+  font-size: 60px;
   cursor: pointer;
-  margin-top: 10px;
 }
