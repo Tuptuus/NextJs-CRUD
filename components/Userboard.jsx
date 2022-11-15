@@ -54,9 +54,11 @@ export default function Userboard({ message }) {
     await deleteDoc(doc(db, currentUser.uid, id));
   };
 
-  const handleEnterAddTask = (e) => {
-    if (e.key === "Enter") {
+  const handleEnterAddTask = (e, type) => {
+    if (e.key === "Enter" && type === "new") {
       uploadNewTask();
+    } else if (e.key === "Enter" && type === "edit") {
+      confirmEditTask();
     }
   };
 
@@ -67,7 +69,6 @@ export default function Userboard({ message }) {
           taskContent: task.taskContent,
           isCompleted: !task.isCompleted,
         });
-        task.isCompleted = !task.isCompleted;
       }
       return task;
     });
@@ -76,16 +77,26 @@ export default function Userboard({ message }) {
 
   const editTaskValue = async (id, task, completed) => {
     if (!completed) {
-      tasksToShow.map((task) => {
-        if (id === task.id) {
-          setTaskValue(task.taskContent);
-          setEditMode(!editMode);
-        }
-      });
+      setTaskValue(task);
+      setEditMode(true);
+      setCurrentEditing(id);
     }
   };
 
-  const confirmEditTask = () => {};
+  useEffect(() => {
+    if (taskValue == "") {
+      setEditMode(false);
+    }
+  }, [taskValue]);
+
+  const confirmEditTask = async () => {
+    const tempValue = taskValue;
+    setTaskValue("");
+    await setDoc(doc(db, currentUser.uid, currentEditing), {
+      taskContent: tempValue,
+      isCompleted: false,
+    });
+  };
 
   useEffect(() => {
     if (currentUser) {
@@ -106,14 +117,26 @@ export default function Userboard({ message }) {
       <Header />
       <div className={contentContainer}>
         <div className={inputContainer}>
-          <input
-            placeholder="Insert your task..."
-            type="text"
-            className={taskInput}
-            value={taskValue}
-            onChange={inputTaskHandle}
-            onKeyPress={handleEnterAddTask}
-          />
+          {editMode ? (
+            <input
+              placeholder="Insert your task..."
+              type="text"
+              className={taskInput}
+              value={taskValue}
+              onChange={inputTaskHandle}
+              onKeyPress={(e) => handleEnterAddTask(e, "edit")}
+            />
+          ) : (
+            <input
+              placeholder="Insert your task..."
+              type="text"
+              className={taskInput}
+              value={taskValue}
+              onChange={inputTaskHandle}
+              onKeyPress={(e) => handleEnterAddTask(e, "new")}
+            />
+          )}
+
           {editMode ? (
             <button onClick={confirmEditTask} className={addTaskBtn}>
               Edit Task
