@@ -8,11 +8,10 @@ export default function Home() {
   const { currentUser } = useAuth();
   const router = useRouter();
   useEffect(() => {
-    console.log("weszło");
     if (currentUser) {
       router.push("MainPage");
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
   return (
     <>
       <Head>

@@ -7,26 +7,47 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/Dashboard.module.css";
 
-export default function Task() {
-  const { task, Left, Right, taskContent, taskIcon } = styles;
+export default function Task(props) {
+  const { data, deleteTask, completeTask, editTask } = props;
+  const {
+    task,
+    Left,
+    Right,
+    taskContent,
+    taskIcon,
+    taskComplete,
+    taskIconDisable,
+  } = styles;
   const deleteIcon = <FontAwesomeIcon icon={faTrash} />;
   const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
   const checkIcon = <FontAwesomeIcon icon={faCheck} />;
 
-  return (
-    <div className={task}>
+  const showTask = data.map((item) => (
+    <div
+      key={item.id}
+      className={`${task} ${item.isCompleted ? taskComplete : null}`}
+    >
       <div className={Left}>
-        <p className={taskContent}>
-          wynieś śmieci a następnie wyprowadź psa a potem kup itemy na obiad a
-          potem kup coś tam i tego i tam tego i teges oraz śmeges i chuj kurwa
-          do dupy i elo
-        </p>
+        <p className={taskContent}>{item.taskContent}</p>
       </div>
       <div className={Right}>
-        <span className={taskIcon}>{deleteIcon}</span>
-        <span className={taskIcon}>{editIcon}</span>
-        <span className={taskIcon}>{checkIcon}</span>
+        <span onClick={() => deleteTask(item.id)} className={taskIcon}>
+          {deleteIcon}
+        </span>
+        <span
+          onClick={() => {
+            editTask(item.id, item.taskContent, item.isCompleted);
+          }}
+          className={`${item.isCompleted ? taskIconDisable : taskIcon}`}
+        >
+          {editIcon}
+        </span>
+        <span onClick={() => completeTask(item.id)} className={taskIcon}>
+          {checkIcon}
+        </span>
       </div>
     </div>
-  );
+  ));
+
+  return <>{showTask}</>;
 }

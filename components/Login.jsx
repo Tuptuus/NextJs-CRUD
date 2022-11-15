@@ -88,6 +88,14 @@ export default function Login() {
     login(loginEmailInputValue, loginPasswordInputValue);
   };
 
+  const handleEnterPress = (e, type) => {
+    if (e.key === "Enter" && type === "login") {
+      signIn();
+    } else if (e.key === "Enter" && type === "register") {
+      createNewUser();
+    }
+  };
+
   return (
     <div className={backgroundLogin}>
       <div className={wholeLoginContainer}>
@@ -120,6 +128,7 @@ export default function Login() {
               placeholder="Enter your email"
               value={loginEmailInputValue}
               onChange={(e) => handleInputs(e, "loginEmail")}
+              onKeyPress={(e) => handleEnterPress(e, "login")}
             />
             <input
               className={inputs}
@@ -127,6 +136,7 @@ export default function Login() {
               placeholder="Enter your password"
               value={loginPasswordInputValue}
               onChange={(e) => handleInputs(e, "loginPassword")}
+              onKeyPress={(e) => handleEnterPress(e, "login")}
             />
             <div className={errorDiv}>
               {loginErrorMsg ? (
@@ -159,6 +169,7 @@ export default function Login() {
               placeholder="Enter your email"
               value={registerEmailInputValue}
               onChange={(e) => handleInputs(e, "registerEmail")}
+              onKeyPress={(e) => handleEnterPress(e, "register")}
             />
             <input
               className={inputs}
@@ -166,6 +177,7 @@ export default function Login() {
               placeholder="Enter your nickname"
               value={registerNickInputValue}
               onChange={(e) => handleInputs(e, "registerNick")}
+              onKeyPress={(e) => handleEnterPress(e, "register")}
               maxLength="15"
             />
             <input
@@ -176,6 +188,7 @@ export default function Login() {
               onChange={(e) => {
                 handleInputs(e, "registerPassword");
               }}
+              onKeyPress={(e) => handleEnterPress(e, "register")}
             />
             <input
               className={inputs}
@@ -183,6 +196,7 @@ export default function Login() {
               placeholder="Confirm your password"
               value={registerConfirmPasswordInputValue}
               onChange={(e) => handleInputs(e, "registerConfirmPassword")}
+              onKeyPress={(e) => handleEnterPress(e, "register")}
             />
             <div className={errorDiv}>
               {registerErrorMsg ? (

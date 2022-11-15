@@ -98,11 +98,32 @@
 
 .taskIcon {
   cursor: pointer;
+  min-width: 40px;
   margin-right: 17px;
   transition: 0.3s;
   font-size: 35px;
 }
 
+.taskIconDisable {
+  cursor: not-allowed;
+  min-width: 40px;
+  margin-right: 17px;
+  transition: 0.3s;
+  font-size: 35px;
+  color: grey;
+}
+
 .taskIcon:hover {
   color: darkorange;
+}
+
+.taskComplete {
+  background-color: white;
+  display: flex;
+  width: 95%;
+  height: fit-content;
+  border-radius: 20px;
+  align-items: center;
+  margin-top: 35px;
+  box-shadow: 5px 5px 15px 2px green;
 }

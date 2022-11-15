@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Userboard from "../components/Userboard";
 
 export default function MainPage({ message }) {
+  const [e, setE] = useState("");
   return (
     <>
-      <Userboard message={message} />
+      <Userboard />
     </>
   );
-}
-
-export async function getServerSideProps() {
-  return { props: { message: "witam to jest z server side" } };
 }
